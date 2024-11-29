@@ -56,13 +56,15 @@ public class hotelreservationplanner{
         public Hotel() {
             rooms = new ArrayList<>();
             reservations = new ArrayList<>();
-            rooms.add(new Room("405", "Standard", 100));
-            rooms.add(new Room("352", "Standard", 150));
-            rooms.add(new Room("511", "Deluxe", 250));
-            rooms.add(new Room("692", "Deluxe", 350));
-            rooms.add(new Room("421", "Suite", 300));
+            rooms.add(new Room("405", "Single", 100));
+            rooms.add(new Room("352", "Single", 150));
+            rooms.add(new Room("405", "Standard", 500));
+            rooms.add(new Room("352", "Standard", 550));
+            rooms.add(new Room("511", "Deluxe", 800));
+            rooms.add(new Room("692", "Deluxe", 950));
+            rooms.add(new Room("421", "Suite", 1000));
         }
-        public List<Room> searchAvailableRooms(String roomType) {
+        public List<Room> AvailableRooms(String roomType) {
             List<Room> availableRooms = new ArrayList<>();
             for (Room room : rooms) {
                 if (room.isAvailable && room.roomType.equalsIgnoreCase(roomType)) {
@@ -80,14 +82,14 @@ public class hotelreservationplanner{
                 System.out.println(reservation);
                 return true;
             } else {
-                System.out.println("Sorry ; already booked.");
+                System.out.println("Sorry, already booked.");
                 return false;
             }
         }
 
         public void processPayment(double amount) {
             System.out.println("Processing payment of $" + amount);
-            System.out.println("Payment successfull!");
+            System.out.println("Payment successfull.");
         }
         public void viewAllBookings() {
             if (reservations.isEmpty()) {
@@ -107,8 +109,8 @@ public class hotelreservationplanner{
         while (!exit) {
             System.out.println(" Welcome to visit our Hotel Reservation service 🙏");
             System.out.println(" How can I help you ?");
-            System.out.println("a. Search Available Rooms");
-            System.out.println("b. Make a Reservation");
+            System.out.println("a. Available Rooms");
+            System.out.println("b. Make Reservation");
             System.out.println("c. View all Bookings");
             System.out.println("d. Exit");
             System.out.print("Please select an option: ");
@@ -117,9 +119,9 @@ public class hotelreservationplanner{
 
             switch (option) {
                 case "a":
-                    System.out.print("Enter room type (Standard/Deluxe/Suite): ");
+                    System.out.print("Enter room type (Single/Standard/Deluxe/Suite): ");
                     String roomType = scanner.nextLine();
-                    List<Room> availableRooms = hotel.searchAvailableRooms(roomType);
+                    List<Room> availableRooms = hotel.AvailableRooms(roomType);
                     if (availableRooms.isEmpty()) {
                         System.out.println("No rooms available for the selected type.");
                     } else {
@@ -130,12 +132,12 @@ public class hotelreservationplanner{
                     }
                     break;
                 case "b":
-                    System.out.print("Enter room type to reserve (Standard/Deluxe/Suite): ");
+                    System.out.print("Enter room type to reserve (Single/Standard/Deluxe/Suite): ");
                     String typeToReserve = scanner.nextLine();
-                    List<Room> roomsToReserve = hotel.searchAvailableRooms(typeToReserve);
+                    List<Room> roomsToReserve = hotel.AvailableRooms(typeToReserve);
 
                     if (roomsToReserve.isEmpty()) {
-                        System.out.println("No available rooms for the selected type.");
+                        System.out.println("No available rooms , for selected type.");
                     } else {
                         System.out.println("Available rooms:");
                         for (Room room : roomsToReserve) {
